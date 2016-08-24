@@ -9,6 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 import App from './containers/App'
 import Home from './containers/Home'
+import Favorites from './containers/Favorites'
 
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={Home}/>
+          <Route path="favorites" component={Favorites} />
         </Route>
       </Router>
       <DevTools />
