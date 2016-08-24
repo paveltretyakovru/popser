@@ -5,6 +5,7 @@ import ActionSearch from 'material-ui/svg-icons/action/search'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, {Component} from 'react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import {connect} from 'react-redux'
 
 class App extends Component {
   componentWillMount() {
@@ -15,20 +16,29 @@ class App extends Component {
     return(
       <MuiThemeProvider>
         <div>
+
+          {/* APP_BAR */}
           <AppBar
             title="Popser"
-            iconElementLeft={
-              <IconButton><NavigationMenu></NavigationMenu></IconButton>
-            }
-            iconElementRight={
-              <IconButton><ActionSearch></ActionSearch></IconButton>
-            }
+            iconElementLeft={<IconButton><NavigationMenu></NavigationMenu></IconButton>}
+            iconElementRight={<IconButton><ActionSearch></ActionSearch></IconButton>}
           />
-          { this.props.children }
+
+          {/* PAGE CONTAINER */}
+          <div className="container">
+            { this.props.children }
+          </div>
+
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps)(App);

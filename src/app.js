@@ -9,7 +9,11 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 import App from './containers/App'
 import Home from './containers/Home'
-import Favorites from './containers/Favorites'
+import Users from './containers/Users'
+import Login from './containers/Login'
+import Search from './containers/Search'
+import Serials from './containers/Serials'
+import Register from './containers/Register'
 
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
@@ -19,8 +23,24 @@ ReactDOM.render(
     <div>
       <Router history={history}>
         <Route path="/" component={App}>
+
           <IndexRoute component={Home}/>
-          <Route path="favorites" component={Favorites} />
+
+          <Route path="login" component={Login} />
+          <Route path="register" component={Register} />
+
+          <Route path="users" component={Users}>
+            <Route path=":id" component={Users} />
+          </Route>
+
+          <Route path="serials" component={Serials}>
+            <Route path=":id" component={Serials} />
+          </Route>
+
+          <Route path="search" component={Search}>
+            <Route path=":query" component={Search} />
+          </Route>
+
         </Route>
       </Router>
       <DevTools />
