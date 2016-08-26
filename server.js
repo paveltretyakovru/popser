@@ -1,20 +1,37 @@
-var config = require('./webpack.config');
+var config = require('./webpack.config')[0];
+var configExt = require('./webpack.config')[1];
+
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
-var getIpAddr = require('./app/modules/helpers/getIpAddr');
+// var getIpAddr = require('./app/modules/helpers/getIpAddr');
 
 var app = new (require('express'))();
 var port = 3000;
-var host = getIpAddr();
+var host = 'localhost';//getIpAddr();
 
 var compiler = webpack(config);
+var compilerExt = webpack(configExt);
+
+compilerExt.watch({
+    aggregateTimeout: 300,
+    poll: true,
+}, function(err, stats) {
+    if(err) {
+      console.log('Extension built with errors:', err);
+    } else {
+      console.log('Extension built', stats.hash);
+    }
+});
+
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
 }));
+
 app.use(webpackHotMiddleware(compiler));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
