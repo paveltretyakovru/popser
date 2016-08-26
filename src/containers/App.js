@@ -16,27 +16,24 @@ class App extends Component {
   }
 
   render() {
-    let { routeToSearch } = { ...this.props.pageActions }
+    let { routeToSearch } = this.props.pageActions
+
+    // Параметры для верхней панели сайта
+    const AppBarOptions = {
+      title: this.props.page.title,
+      iconElementLeft: <IconButton><NavigationMenu></NavigationMenu></IconButton>,
+      iconElementRight: <IconButton onTouchTap={routeToSearch}><ActionSearch></ActionSearch></IconButton>,
+    }
 
     return(
       <MuiThemeProvider>
         <div>
 
           {/* APP_BAR */}
-          <AppBar
-            title="Popser"
-            iconElementLeft={<IconButton><NavigationMenu></NavigationMenu></IconButton>}
-            iconElementRight={
-              <IconButton onTouchTap={routeToSearch}>
-                <ActionSearch></ActionSearch>
-              </IconButton>
-            }
-          />
+          <AppBar { ...AppBarOptions } />
 
           {/* PAGE CONTAINER */}
-          <div className="container">
-            { this.props.children }
-          </div>
+          <div className="container">{ this.props.children }</div>
 
         </div>
       </MuiThemeProvider>
@@ -45,9 +42,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('App mapStateToProps', state);
   return {
     user: state.user,
+    page: state.page,
   }
 }
 

@@ -37,8 +37,8 @@ ReactDOM.render(
             <Route path=":id" component={Serials} />
           </Route>
 
-          <Route path="search" component={Search}>
-            <Route path=":query" component={Search} />
+          <Route path="search" mytitle="Поиск...Here" component={Search}>
+            <Route path=":query" mytitle="Поиск..." component={Search} />
           </Route>
 
         </Route>
