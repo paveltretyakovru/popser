@@ -5,14 +5,15 @@ var precss = require('precss');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-source-map',
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
     './src/app',
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/public/',
   },
