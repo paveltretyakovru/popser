@@ -1,3 +1,4 @@
+var express = require('express');
 var config = require('./webpack.config')[0];
 var configExt = require('./webpack.config')[1];
 
@@ -39,13 +40,7 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/includeStylesheets.js', function(req, res) {
-  res.sendFile(__dirname + '/public/includeStylesheets.js');
-});
-
-app.get('/bundle.js', function(req, res) {
-  res.sendFile(__dirname + '/public/bundle.js');
-});
+app.use(express.static('public'));
 
 app.listen(port, host, function(error) {
   if (error) {
