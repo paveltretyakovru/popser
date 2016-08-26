@@ -1,3 +1,4 @@
+import thunk from 'redux-thunk'
 import DevTools from '../modules/tools/DevTools'
 import rootReducer from '../reducers'
 import { hashHistory } from 'react-router'
@@ -7,7 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 
 const routerEnchancer = routerMiddleware(hashHistory)
 const enchancer = compose(
-  applyMiddleware(checkAuth, routerEnchancer),
+  applyMiddleware(thunk, checkAuth, routerEnchancer),
   DevTools.instrument(),
 )
 

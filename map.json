@@ -1,5 +1,6 @@
 {
-  user: {
-    auth: false
+  "user": {
+    "auth": "false",
+    "name": ""
   }
 }

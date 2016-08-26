@@ -20,7 +20,7 @@ module.exports = [
     },
     plugins: [
       new webpack.DefinePlugin({
-        MODE: JSON.stringify('SITE'),
+        APP_MODE: JSON.stringify('SITE'),
       }),
       new WebpackNotifierPlugin({title: 'Webpack!', alwaysNotify: true}),
       new webpack.optimize.OccurenceOrderPlugin(),
@@ -66,7 +66,7 @@ module.exports = [
     },
     plugins: [
       new webpack.DefinePlugin({
-        MODE: JSON.stringify('EXTENSION'),
+        APP_MODE: JSON.stringify('EXTENSION'),
       }),
       new WebpackNotifierPlugin({title: 'Webpack!', alwaysNotify: true}),
       new webpack.optimize.OccurenceOrderPlugin(),
