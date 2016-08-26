@@ -1,7 +1,8 @@
 const initialState = {
   auth: false,
+  name: '',
 }
 
-export function user (state = initialState) {
+export default function user (state = initialState) {
   return state
 }
