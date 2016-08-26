@@ -1,10 +1,12 @@
 import {
+  TOGGLE_DRAWER,
   SET_PAGE_TITLE,
 } from '../constants/page'
 
 const initialState = {
-  title: '',
+  title: 'POPSER',
   serials: [],
+  drawerOpen: false,
 }
 
 export default function page (state = initialState, action) {
@@ -12,8 +14,10 @@ export default function page (state = initialState, action) {
 
     // Устанавливаем заголовок в меню
     case SET_PAGE_TITLE:
-      console.log('SET PAGE TITLE :)')
       return {...state, title: action.payload}
+
+    case TOGGLE_DRAWER:
+      return {...state, drawerOpen: !state.drawerOpen}
 
     default:
       return state

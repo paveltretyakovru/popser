@@ -4,6 +4,8 @@
     "name": ""
   },
   "page": {
-    "serials": []
+    "title": "POPSER",
+    "serials": [],
+    "drawerOpen": false
   }
 }
