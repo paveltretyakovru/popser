@@ -43,7 +43,13 @@ ReactDOM.render(
 
         </Route>
       </Router>
-      <DevTools />
+      {
+        /* eslint-disable */
+        (APP_MODE === 'SITE')
+          ? <DevTools />
+          : null
+        /* eslint-enable */
+      }
     </div>
   </Provider>,
   document.getElementById('mount')

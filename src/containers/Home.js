@@ -1,15 +1,16 @@
 import LoginForm from '../components/home/LoginForm'
 import {connect} from 'react-redux'
+import FlatButton from 'material-ui/FlatButton'
+import RegisterForm from '../components/home/RegisterForm'
 import * as pageActions from '../actions/page'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
-import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 class Home extends Component {
   getStyles() {
     return {
       colsStyle: {
-        marginTop: 16,
+        marginTop: 24,
         textAlign: 'left',
       },
       imgBlockStyle: {
@@ -18,34 +19,58 @@ class Home extends Component {
       imgStyle: {
         width: '80%',
       },
+      forgotBlockStyle: {
+        textAlign: 'center',
+        marginTop: 16,
+      },
     }
   }
 
   render() {
-    let {colsStyle, imgBlockStyle, imgStyle} = this.getStyles()
+    const {
+      colsStyle, imgBlockStyle, imgStyle, forgotBlockStyle,
+    } = this.getStyles()
+    const forgotButton = <FlatButton label="Забыли пароль?"/>
 
-    return(<div className="row center-xs middle-md">
-      <div style={colsStyle} className="col-xs-11 col-md-4">
-          <LoginForm />
+
+    return(<div>
+      <div className="row center-xs middle-md middle-xs">
+
+        <div style={colsStyle} className="col-xs-8 col-md-3">
+            <LoginForm />
+        </div>
+
+        <div
+          style={{...colsStyle, ...imgBlockStyle}}
+          className="col-xs-8 col-md-3 last-xs"
+        >
+          {
+            /* eslint-disable */
+            (APP_MODE === 'SITE')
+              ? <img src="./images/cat_popcorn.png" style={imgStyle} />
+              : null
+              /* eslint-enable */
+          }
+        </div>
+
+        <div style={colsStyle} className="col-xs-8 col-md-3 last-md">
+              <RegisterForm />
+        </div>
+
+      {/* ./ ROW */}
       </div>
-      <div
-        style={{...colsStyle, ...imgBlockStyle}}
-        className="col-xs-11 col-md-4 last-xs"
-      >
-        <img src="./images/cat_popcorn.png" style={imgStyle} />
+
+      <div className="row">
+        <div className="col-xs-12 col-md-12" style={forgotBlockStyle}>
+          {forgotButton}
+        </div>
       </div>
-      <div style={colsStyle} className="col-xs-11 col-md-4 last-md">
-        <Card>
-          <CardHeader title="Регистрация" />
-          <CardText>
-            REG
-          </CardText>
-        </Card>
-      </div>
+
     </div>)
   }
 
   componentWillMount() {
+    // Устанавилваем зоголовок на сайте
     this.props.pageActions.setPageTitle('POPSER');
   }
 }

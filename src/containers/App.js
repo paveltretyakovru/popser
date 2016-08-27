@@ -19,6 +19,9 @@ import SearchIcon from 'material-ui/svg-icons/action/search'
 class App extends Component {
   constructor(props) {
     super(props)
+  }
+
+  componentWillMount() {
     injectTapEventPlugin()
   }
 
@@ -46,7 +49,7 @@ class App extends Component {
     ]
     const DrawerMenu = <Drawer
       open={drawerOpen}
-      // width={200}
+      width={200}
       docked={false}
       disableSwipeToOpen={true}
     >

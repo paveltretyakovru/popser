@@ -7,10 +7,14 @@ import { routerMiddleware } from 'react-router-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 
 const routerEnchancer = routerMiddleware(hashHistory)
-const enchancer = compose(
-  applyMiddleware(thunk, checkAuth, routerEnchancer),
-  DevTools.instrument(),
-)
+const middlewares = applyMiddleware(thunk, checkAuth, routerEnchancer)
+
+
+/* eslint-disable */
+const enchancer = (APP_MODE === 'SITE')
+  ? compose(middlewares,DevTools.instrument())
+  : compose(middlewares)
+/* eslint-enable */
 
 export function configureStore() {
 
