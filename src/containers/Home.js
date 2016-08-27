@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import RegisterForm from '../components/home/RegisterForm'
 import * as pageActions from '../actions/page'
+import * as userActions from '../actions/user'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
@@ -30,6 +31,7 @@ class Home extends Component {
     const {
       colsStyle, imgBlockStyle, imgStyle, forgotBlockStyle,
     } = this.getStyles()
+    const { sendRegisterUser } = this.props.userActions
     const forgotButton = <FlatButton label="Забыли пароль?"/>
 
 
@@ -54,7 +56,7 @@ class Home extends Component {
         </div>
 
         <div style={colsStyle} className="col-xs-8 col-md-3 last-md">
-              <RegisterForm />
+              <RegisterForm sendRegisterUser={sendRegisterUser} />
         </div>
 
       {/* ./ ROW */}
@@ -84,6 +86,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     pageActions: bindActionCreators(pageActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch),
   }
 }
 

@@ -50,7 +50,7 @@ class App extends Component {
     const DrawerMenu = <Drawer
       open={drawerOpen}
       width={200}
-      docked={false}
+      // docked={false}
       disableSwipeToOpen={true}
     >
       <AppBar onTouchTap={toggleDrawer} title="POPSER" />

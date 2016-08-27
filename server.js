@@ -8,6 +8,9 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 // var getIpAddr = require('./app/modules/helpers/getIpAddr');
 
+// Require Routes
+const registerRoute = require('./app/routes/registerRoute');
+
 var app = new (require('express'))();
 var port = 3000;
 var host = 'localhost';//getIpAddr();
@@ -39,6 +42,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
+
+// Routes
+app.use('/register', registerRoute);
 
 app.use(express.static('public'));
 
