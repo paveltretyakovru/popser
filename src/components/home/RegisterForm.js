@@ -85,7 +85,7 @@ class RegisterForm extends Component {
           <div style={buttonsBlockStyle}>
             <FlatButton
               label="Зарегистрироваться"
-              secondary={true}
+              primary={true}
               onTouchTap={::this.handleSendRegisterUser}
             />
           </div>

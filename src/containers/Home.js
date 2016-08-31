@@ -32,7 +32,7 @@ class Home extends Component {
       colsStyle, imgBlockStyle, imgStyle, forgotBlockStyle,
     } = this.getStyles()
     const { sendRegisterUser } = this.props.userActions
-    const forgotButton = <FlatButton label="Забыли пароль?"/>
+    const forgotButton = <FlatButton secondary={true} label="Забыли пароль?"/>
 
 
     return(<div>

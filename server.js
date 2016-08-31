@@ -1,22 +1,30 @@
-var express = require('express');
-var config = require('./webpack.config')[0];
-var configExt = require('./webpack.config')[1];
+/* eslint-disable */
+const express = require('express');
+const config = require('./webpack.config')[0];
+const configExt = require('./webpack.config')[1];
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
 
-var webpack = require('webpack');
-var bodyParser = require('body-parser');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
+const webpack = require('webpack');
+const bodyParser = require('body-parser');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 // var getIpAddr = require('./app/modules/helpers/getIpAddr');
 
 // Require Routes
+const rootRoute = require('./app/routes/rootRoute');
 const registerRoute = require('./app/routes/registerRoute');
+const webpackDevMiddConfig = {
+  noInfo: true,
+  publicPath: config.output.publicPath,
+}
 
-var app = new (require('express'))();
-var port = 3000;
-var host = 'localhost';//getIpAddr();
-
-var compiler = webpack(config);
-var compilerExt = webpack(configExt);
+const app = new (require('express'))();
+const port = 3000;
+const host = 'localhost';//getIpAddr();
+const compiler = webpack(config);
+const compilerExt = webpack(configExt);
 
 compilerExt.watch({
     aggregateTimeout: 300,
@@ -29,24 +37,22 @@ compilerExt.watch({
     }
 });
 
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath,
+// Session
+mongoose.connect('mongodb://localhost/test');
+app.use(session({
+  secret: 'hellomyfuckingworld!',
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
+app.use(webpackDevMiddleware(compiler, webpackDevMiddConfig));
 app.use(webpackHotMiddleware(compiler));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
-});
+app.use(express.static('public'));
 
 // Routes
+app.use('/', rootRoute);
 app.use('/register', registerRoute);
-
-app.use(express.static('public'));
 
 app.listen(port, host, function(error) {
   if (error) {

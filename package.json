@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "supervisor --watch app server.js ",
+    "dev_localhost": "HOST=localhost supervis or --watch app server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tretyakov Pavel",
@@ -44,12 +45,15 @@
     "babel-runtime": "^6.11.6",
     "body-parser": "^1.15.2",
     "bookshelf": "^0.10.0",
+    "connect-mongo": "^1.3.2",
+    "express-session": "^1.14.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.0",
     "knex": "^0.11.10",
     "lodash": "^4.15.0",
     "material-ui": "^0.15.3",
     "mdi-react": "^1.6.50-3",
+    "mongoose": "^4.5.10",
     "mysql": "^2.11.1",
     "promise": "^7.1.1",
     "react": "^15.3.0",

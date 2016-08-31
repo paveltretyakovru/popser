@@ -1,4 +1,6 @@
-export const USER_REGISTER_URL = '/register'
+/* eslint-disable */
+export const USER_REGISTER_URL = `http://${HOST}/register`
+/* eslint-enable */
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST'
 export const USER_REGISTER_REQUEST_FAIL = 'USER_REGISTER_REQUEST_FAIL'
 export const USER_REGISTER_REQUEST_SUCCESS = 'USER_REGISTER_REQUEST_SUCCESS'
